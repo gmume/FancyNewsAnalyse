@@ -1,8 +1,17 @@
 console.log("Hello World!");
 
-let blob;
+let colors;
 
 const sketch = function (p5) {
+  p5.preload = function () {
+    // imgElements = document.getElementsByTagName("IMG");
+    // images = [];
+
+    // imgElements.forEach((imgElement) => {
+    //   images = p5.loadImage(imgElement.src);
+    // });
+  };
+
   p5.setup = function () {
     p5.rectMode(p5.CENTER);
     let c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
@@ -13,39 +22,50 @@ const sketch = function (p5) {
     c.style("z-index", "99999999");
     //p5.clear();
 
-    blob = takeScreenshot();
+    colors = getAllColors();
 
-    console.log("blob: "+blob.type);
-    blob;
-  
-    // generate();
+    for (let i = 0; i < colors.length; i++) {
+      console.log("colors " + i + ": " + colors[i]);
+    }
   };
 
-  function takeScreenshot() {
-    var screenshot = document.documentElement.cloneNode(true);
-    screenshot.style.pointerEvents = 'none';
-    // screenshot.style.overflow = 'hidden';
-    screenshot.style.webkitUserSelect = 'none';
-    screenshot.style.mozUserSelect = 'none';
-    screenshot.style.msUserSelect = 'none';
-    screenshot.style.oUserSelect = 'none';
-    screenshot.style.userSelect = 'none';
-    screenshot.dataset.scrollX = window.scrollX;
-    screenshot.dataset.scrollY = window.scrollY;
-    var blob = new Blob([screenshot.outerHTML], {
-      type: 'text/html'
-    });
-    return blob;
+  function getAllColors() {
+
+    var rgbRegex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/;
+    var allColors = [];
+    var elems = document.getElementsByTagName("*");
+    var total = elems.length;
+    var x, y, elemStyles, styleName, styleValue, rgbVal;
+
+    for (x = 0; x < total; x++) {
+      elemStyles = window.getComputedStyle(elems[x]);
+
+      for (y = 0; y < elemStyles.length; y++) {
+        styleName = elemStyles[y];
+        styleValue = elemStyles[styleName];
+
+        if (!styleValue) {
+          continue;
+        }
+
+        // convert to string to avoid match exceptions
+        styleValue += "";
+
+        rgbVal = styleValue.match(rgbRegex);
+        if (!rgbVal) { // property does not contain a color
+          continue;
+        }
+
+        if (allColors.indexOf(rgbVal.input) == -1) { // avoid duplicate entries
+          allColors.push(rgbVal.input);
+        }
+      }
+    }
+
+    return allColors;
   }
   
-  function generate() {
-    window.URL = window.URL || window.webkitURL;
-    window.open(window.URL
-      .createObjectURL(takeScreenshot()));
-  }
-
   p5.draw = function () {
-    
   };
 
   p5.windowResized = function () {
