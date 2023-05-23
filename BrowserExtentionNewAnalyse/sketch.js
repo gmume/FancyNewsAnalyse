@@ -3,14 +3,6 @@ console.log("Hello World!");
 let colors;
 
 const sketch = function (p5) {
-  p5.preload = function () {
-    // imgElements = document.getElementsByTagName("IMG");
-    // images = [];
-
-    // imgElements.forEach((imgElement) => {
-    //   images = p5.loadImage(imgElement.src);
-    // });
-  };
 
   p5.setup = function () {
     p5.rectMode(p5.CENTER);
@@ -64,7 +56,7 @@ const sketch = function (p5) {
 
     return allColors;
   }
-  
+
   p5.draw = function () {
   };
 
