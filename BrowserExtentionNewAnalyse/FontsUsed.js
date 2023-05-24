@@ -29,10 +29,7 @@ class FontsUsed  {
         this.p5.textSize(50);
         this.p5.fill("blue");
 
-        console.log("entred showFonts");
-        console.log("this.fonts: "+this.fonts);
         this.p5.textFont(this.fonts[0]);
-        console.log("font passed?");
         this.p5.text(this.fonts[0], 50, 100);
 
 

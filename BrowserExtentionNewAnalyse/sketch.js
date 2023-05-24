@@ -1,9 +1,9 @@
 let colors;
 let loremIpsum;
 let fontsList;
+let proportion;
 
 const sketch = function (p5) {
-
   p5.setup = function () {
     p5.rectMode(p5.CENTER);
 
@@ -29,12 +29,21 @@ const sketch = function (p5) {
     //   console.log("colors " + i + ": " + colors[i]);
     // }
 
+    //get all used fonts of website
     fontsList = new FontsUsed(p5);
     fontsList.showFonts();
+
+    //get proportion of text to images of website
+    proportion = new Proportion(p5);
+
+    //startet die Suche
+    proportion.traverseNodes(document.body);
   };
 
   p5.draw = function () {
-    
+
+    //draw shapes in proportion of text to images of website
+    proportion.draw();
   };
 
   p5.windowResized = function () {
