@@ -1,5 +1,6 @@
 let colors;
 let loremIpsum;
+let fontsList;
 
 const sketch = function (p5) {
 
@@ -27,6 +28,9 @@ const sketch = function (p5) {
     // for (let i = 0; i < colors.length; i++) {
     //   console.log("colors " + i + ": " + colors[i]);
     // }
+
+    fontsList = new FontsUsed(p5);
+    fontsList.showFonts();
   };
 
   p5.draw = function () {
