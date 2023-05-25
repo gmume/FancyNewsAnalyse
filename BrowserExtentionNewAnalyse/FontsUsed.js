@@ -33,6 +33,13 @@ class FontsUsed  {
         this.p5.textSize(50);
         this.p5.fill("blue");
 
-        
+        let y = 100;
+
+        for (let i = 0; i < this.fonts.length; i++) {
+
+         this.p5.textFont(this.fonts[i]);
+         this.p5.text(this.fonts[i], 50, y);
+         y += 50
+        }
     }
 }
