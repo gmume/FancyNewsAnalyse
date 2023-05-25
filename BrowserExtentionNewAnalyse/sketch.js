@@ -16,7 +16,6 @@ const sketch = function (p5) {
 
     p5.textSize(20);
     p5.fill(255, 0, 0);
-    p5.textFont("Arial");
 
     //create dummy text in the length of the websites chars count
     loremIpsum = new LoremIpsum(p5);
@@ -32,12 +31,15 @@ const sketch = function (p5) {
     //get all used fonts of website
     fontsList = new FontsUsed(p5);
     fontsList.showFonts();
+    console.log(fontsList)
 
     //get proportion of text to images of website
     proportion = new Proportion(p5);
 
     //startet die Suche
     proportion.traverseNodes(document.body);
+
+    p5.textFont("Arial");
   };
 
   p5.draw = function () {

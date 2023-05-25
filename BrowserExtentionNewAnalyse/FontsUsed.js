@@ -29,16 +29,25 @@ class FontsUsed  {
         this.p5.textSize(50);
         this.p5.fill("blue");
 
-        this.p5.textFont(this.fonts[0]);
-        this.p5.text(this.fonts[0], 50, 100);
+        //this.p5.textFont(this.fonts[0]);
+        //this.p5.text(this.fonts[0], 50, 100);
 
 
-       this.p5.textFont(this.fonts[1]);
-       this.p5.text(this.fonts[1], 50, 150);
+       //this.p5.textFont(this.fonts[1]);
+       //this.p5.text(this.fonts[1], 50, 150);
 
 
-        this.p5.textFont(this.fonts[2]);
-        this.p5.text(this.fonts[2], 50, 200);
+        //this.p5.textFont(this.fonts[2]);
+        //this.p5.text(this.fonts[2], 50, 200);
+
+        let y = 100;
+
+        for (let i = 0; i < this.fonts.length; i++) {
+
+         this.p5.textFont(this.fonts[i]);
+         this.p5.text(this.fonts[i], 50, y);
+         y += 50
+        }
 
 
         // this.p5.textFont(this.fonts[3]);

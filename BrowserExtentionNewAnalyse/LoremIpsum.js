@@ -85,7 +85,7 @@ class LoremIpsum {
   createTextField() {
     // p5.textSize(20);
     // p5.fill(255, 0, 0);
-    // p5.textFont("Arial");
+    //p5.textFont(this.fonts[0]);
 
     let x = 50;
     let y = 100;
@@ -93,7 +93,7 @@ class LoremIpsum {
     for (let i = 0; i < this.textArray.length; i++) {
       this.p5.text(this.textArray[i], x, y);
 
-      if (x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50) {
+      if (x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 350) {
         x = 50;
         y += 25;
       } else {
