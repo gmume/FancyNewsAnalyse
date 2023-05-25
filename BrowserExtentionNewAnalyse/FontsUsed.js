@@ -19,7 +19,6 @@ class FontsUsed  {
             const font = it.next();
 
             if (!font.done) {
-                console.log("font.value[0].family: "+font.value[0].family)
                 arr.push(font.value[0].family);
             } else {
                 done = font.done;
