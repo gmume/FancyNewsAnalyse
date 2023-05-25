@@ -33,32 +33,6 @@ class FontsUsed  {
         this.p5.textSize(50);
         this.p5.fill("blue");
 
-        console.log("this.fonts[0]: "+this.fonts[0]);
-        this.p5.textFont(this.fonts[0]);
-        this.p5.text(this.fonts[0], 50, 100);
-
-
-       this.p5.textFont(this.fonts[1]);
-       this.p5.text(this.fonts[1], 50, 150);
-
-
-        this.p5.textFont(this.fonts[2]);
-        this.p5.text(this.fonts[2], 50, 200);
-
-
-        // this.p5.textFont(this.fonts[3]);
-        // this.p5.text(this.fonts[3], 50, 250);
-
-
-        // this.p5.textFont(this.fonts[4]);
-        // this.p5.text(this.fonts[4], 50, 300);
-
-
-        // this.p5.textFont(this.fonts[5]);
-        // this.p5.text(this.fonts[5], 50, 350);
-
-
-        // this.p5.textFont(this.fonts[6]);
-        // this.p5.text(this.fonts[6], 50, 400);
+        
     }
 }
