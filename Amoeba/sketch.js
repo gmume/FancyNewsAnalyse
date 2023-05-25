@@ -1,11 +1,9 @@
-var zhue = 0;
-var zpos = 0;
-var points = [];
-
-var numPoints = 200;
-var angleGap;
-
-var bgColor;
+let zhue = 0;
+let zpos = 0;
+let points = [];
+let numPoints = 200;
+let angleGap;
+let bgColor;
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -14,15 +12,12 @@ function setup() {
   noStroke();
   
   angleGap = 360 / numPoints;
-  
   bgColor = color('#141636');
 }
 
 function draw() {
   background(bgColor);
- 
   points = [];
-  
   let firstPoint;
   
   // Main Shape
@@ -40,14 +35,12 @@ function draw() {
     let a = angleGap * i;
     let nx = 600 + sin(a) * 0.3;   // nx and ny pos for noisy angle jitter
     let ny = 600 + cos(a) * 0.3;
-    
     let r = 300 + map(noise(nx, ny, zpos), 0, 1, -300, 200);
      
     nx = 1600 + sin(a) * 0.9;    // nx and ny pos for noisy hue jitter 
     ny = 1600 + cos(a) * 0.9;    
     
     let h = map(noise(nx, ny, zhue), 0, 1, 150, 350);
-    
     let x = sin(a) * r;     // actual x and y to draw 
     let y = cos(a) * r;
   
@@ -73,7 +66,6 @@ function draw() {
   vertex(0, 0);                         // End shape in centre so gradient aims there
   endShape(CLOSE);
    
-  
   // Inner Shape 
   fill(bgColor);
   beginShape();
@@ -85,5 +77,4 @@ function draw() {
   // To animate through noise
   zpos+= 0.003;
   zhue+= 0.008;
-  
 }
