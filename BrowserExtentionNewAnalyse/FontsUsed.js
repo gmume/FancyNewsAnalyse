@@ -4,6 +4,10 @@ class FontsUsed  {
         this.fonts = this.listFonts();
     }
 
+    getFonts() {
+        return this.fonts;
+    }
+
     listFonts() {
         let { fonts } = document;
         const it = fonts.entries();
@@ -15,13 +19,13 @@ class FontsUsed  {
             const font = it.next();
 
             if (!font.done) {
+                console.log("font.value[0].family: "+font.value[0].family)
                 arr.push(font.value[0].family);
             } else {
                 done = font.done;
             }
         }
 
-        // converted to set then arr to filter repetitive values
         return [...new Set(arr)];
     }
 
@@ -29,6 +33,7 @@ class FontsUsed  {
         this.p5.textSize(50);
         this.p5.fill("blue");
 
+        console.log("this.fonts[0]: "+this.fonts[0]);
         this.p5.textFont(this.fonts[0]);
         this.p5.text(this.fonts[0], 50, 100);
 
