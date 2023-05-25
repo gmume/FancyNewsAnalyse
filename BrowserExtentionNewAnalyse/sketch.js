@@ -1,7 +1,8 @@
-let colors;
+const colors = new Colors();
 let loremIpsum;
-let fontsList;
 let proportion;
+let fontsManager;
+let fontsList;
 
 const sketch = function (p5) {
   p5.setup = function () {
@@ -16,32 +17,30 @@ const sketch = function (p5) {
 
     p5.textSize(20);
     p5.fill(255, 0, 0);
-    p5.textFont("Arial");
+
+    loremIpsum = new LoremIpsum(p5);
+    proportion = new Proportion(p5);
+    fontsManager = new FontsUsed(p5);
 
     //create dummy text in the length of the websites chars count
-    loremIpsum = new LoremIpsum(p5);
     loremIpsum.createTextField();
-
-    //get all used colors of website
-    colors = new Colors().getAllColors();
 
     // for (let i = 0; i < colors.length; i++) {
     //   console.log("colors " + i + ": " + colors[i]);
     // }
 
-    //get all used fonts of website
-    fontsList = new FontsUsed(p5);
-    fontsList.showFonts();
-
-    //get proportion of text to images of website
-    proportion = new Proportion(p5);
+    fontsList = fontsManager.getFonts();
+    fontsManager.showFonts();
 
     //startet die Suche
     proportion.traverseNodes(document.body);
+
+    console.log("fontsList: " + fontsList);
+    console.log("fontsList[0]: " + fontsList[0]);
+    p5.textFont(fontsList[0]);
   };
 
   p5.draw = function () {
-
     //draw shapes in proportion of text to images of website
     proportion.draw();
   };
