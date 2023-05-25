@@ -83,10 +83,6 @@ class LoremIpsum {
   }
 
   createTextField() {
-    // p5.textSize(20);
-    // p5.fill(255, 0, 0);
-    // p5.textFont("Arial");
-
     let x = 50;
     let y = 100;
 
