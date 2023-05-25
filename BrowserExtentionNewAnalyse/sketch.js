@@ -32,17 +32,14 @@ const sketch = function (p5) {
     fontsList = fontsManager.getFonts();
     fontsManager.showFonts();
 
-    //startet die Suche
-    proportion.traverseNodes(document.body);
+    //draw shapes in proportion of text to images of website
+    proportion.draw();
 
-    console.log("fontsList: " + fontsList);
-    console.log("fontsList[0]: " + fontsList[0]);
     p5.textFont(fontsList[0]);
   };
 
   p5.draw = function () {
-    //draw shapes in proportion of text to images of website
-    proportion.draw();
+
   };
 
   p5.windowResized = function () {
