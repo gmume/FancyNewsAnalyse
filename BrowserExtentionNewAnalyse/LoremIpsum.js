@@ -1,4 +1,5 @@
 class LoremIpsum {
+
   constructor(p5) {
     this.p5 = p5;
     this.textContent =
