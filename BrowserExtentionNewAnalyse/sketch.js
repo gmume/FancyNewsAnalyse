@@ -64,7 +64,7 @@ const sketch = function (p5) {
 
     p5.textFont(fontsList[0]);
     fontsManager.showFonts();
-
+ 
     for (let i = 0; i < colorList.length; i++) {
       p5.fill(p5.color(colorList[i]));
       p5.rect(p5.width / i, 0, p5.width / colorList.length, p5.height / 10);
