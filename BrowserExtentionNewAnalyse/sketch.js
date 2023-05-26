@@ -39,7 +39,19 @@ const sketch = function (p5) {
   };
 
   p5.draw = function () {
-
+    // Fonts turn 90 degrees
+    // p5.push();
+    // p5.translate(p5.width - 150, p5.height / 2);
+    // p5.angleMode(p5.DEGREES);
+    // let angle = -90;
+    // p5.rotate(angle);
+    // p5.textSize(50);
+    // p5.noStroke();
+    // p5.fill("blue");
+    // p5.text("Schriftart 1", 0, 0);
+    // p5.text("Schriftart 2", 0, 50);
+    // p5.text("Schriftart 3", 0, 100);
+    // p5.pop();
   };
 
   p5.windowResized = function () {

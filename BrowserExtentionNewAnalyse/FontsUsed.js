@@ -1,4 +1,4 @@
-class FontsUsed  {
+class FontsUsed {
     constructor(p5) {
         this.p5 = p5;
         this.fonts = this.listFonts();
@@ -35,10 +35,23 @@ class FontsUsed  {
         let y = 100;
 
         for (let i = 0; i < this.fonts.length; i++) {
-
-         this.p5.textFont(this.fonts[i]);
-         this.p5.text(this.fonts[i], 50, y);
-         y += 50
+            this.p5.textFont(this.fonts[i]);
+            this.p5.text(this.fonts[i], 50, y);
+            y += 50;
         }
+
+        // Fonts turn 90 degrees
+        this.p5.push();
+        this.p5.translate(this.p5.width - 150, this.p5.height / 2);
+        this.p5.angleMode(this.p5.DEGREES);
+        let angle = -90;
+        this.p5.rotate(angle);
+        this.p5.textSize(50);
+        this.p5.noStroke();
+        this.p5.fill("blue");
+        this.p5.text("Schriftart 1", 0, 0);
+        this.p5.text("Schriftart 2", 0, 50);
+        this.p5.text("Schriftart 3", 0, 100);
+        this.p5.pop();
     }
 }
