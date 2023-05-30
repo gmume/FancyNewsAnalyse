@@ -14,10 +14,20 @@ let points = [];
 let numPoints = 200;
 let angleGap;
 let bgColor;
+let colScale;
 
-const sketch = function (p5) {
+let myd3;
+
+const sketch2D = function (p5) {
   p5.setup = function () {
-    setupCanvas();
+    console.log("d3: " + d3);
+    // setupCanvas(p5, this);
+    const c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+    c.style("top", "0px");
+    c.style("left", "0px");
+    c.style("pointer-events", "none");
+    c.style("position", "fixed");
+    c.style("z-index", "99999999");
 
     loremIpsum = new LoremIpsum(p5);
     proportion = new Proportion(p5);
@@ -30,24 +40,55 @@ const sketch = function (p5) {
     p5.textSize(20);
     p5.fill(255, 0, 0);
 
-    // //create dummy text in the length of the websites chars count
-    // loremIpsum.createTextField();
+    //create dummy text in the length of the websites chars count
+    loremIpsum.createTextField();
 
-    // //draw shapes in proportion of text to images of website
-    // proportion.draw();
+    //draw shapes in proportion of text to images of website
+    proportion.draw();
 
-    // p5.textFont(fontsList[0]);
-    // fontsManager.showFonts();
+    p5.textFont(fontsList[0]);
+    fontsManager.showFonts();
 
-    // for (let i = 0; i < colorList.length; i++) {
-    //   p5.fill(p5.color(colorList[i]));
-    //   p5.rect(p5.width / i, 0, p5.width / colorList.length, p5.height / 10);
-    // }
+    for (let i = 0; i < colorList.length; i++) {
+      p5.fill(p5.color(colorList[i]));
+      p5.rect(p5.width / i, 0, p5.width / colorList.length, p5.height / 10);
+    }
+
+    angleGap = 360 / numPoints;
+    bgColor = p5.color("#141636");
+    colScale = d3.scaleLinear().domain([-10, 0, 10]).range([
+      "red",
+      "blue",
+      "yellow",
+      "ornage",
+    ]);
+    console.log("colScale: "+colScale);
+  };
+
+  p5.draw = function () {
+  };
+};
+
+const sketch3D = function (p5) {
+  p5.setup = function () {
+    // setupCanvas(p5, this);
+
+    const c = p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
+
+    c.style("top", "0px");
+    c.style("left", "0px");
+    c.style("pointer-events", "none");
+    c.style("position", "fixed");
+    c.style("z-index", "99999999");
+
+    proportion = new Proportion(p5);
+    colorManager = new Colors();
+    colorList = colorManager.getColors();
 
     //amoeba
-    // p5.angleMode(p5.DEGREES);
-    // p5.colorMode(p5.HSB, 360, 100, 100, 100);
-    // p5.noStroke();
+    p5.angleMode(p5.DEGREES);
+    p5.colorMode(p5.HSB, 360, 100, 100, 100);
+    p5.noStroke();
 
     angleGap = 360 / numPoints;
     bgColor = p5.color("#141636");
@@ -64,20 +105,14 @@ const sketch = function (p5) {
 
     p5.textFont(fontsList[0]);
     fontsManager.showFonts();
- 
+
     for (let i = 0; i < colorList.length; i++) {
       p5.fill(p5.color(colorList[i]));
       p5.rect(p5.width / i, 0, p5.width / colorList.length, p5.height / 10);
     }
 
-    //amoeba
-    p5.push();
-    // cWEBGL = p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
-    
-    p5.angleMode(p5.DEGREES);
-    p5.colorMode(p5.HSB, 360, 100, 100, 100);
-    p5.noStroke();
-    
+    // //amoeba
+
     points = [];
     let firstPoint;
 
@@ -118,11 +153,11 @@ const sketch = function (p5) {
         y: p5.cos(a) * r * 0.2, // to draw smaller inner shape in bg color
       }; // to cover the bit where the gradient all joins together
 
-      p5.fill(h, 95, 100);
+      p5.fill(colScale(h * 2));
       p5.vertex(x, y);
     }
 
-    p5.fill(firstPoint.h, 95, 100);
+    p5.fill(colScale(firstPoint.h * 2));
     p5.vertex(firstPoint.x, firstPoint.y); // First / Last outer point
     p5.vertex(0, 0); // End shape in centre so gradient aims there
     p5.endShape(p5.CLOSE);
@@ -138,27 +173,24 @@ const sketch = function (p5) {
     // To animate through noise
     zpos += 0.003;
     zhue += 0.008;
-
-    p5.pop();
   };
-
-  // function setupCanvasWEBGL() {
-  //   cWEBGL = p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
-  //   cWEBGL.style("top", "0px");
-  //   cWEBGL.style("left", "0px");
-  //   cWEBGL.style("pointer-events", "none");
-  //   cWEBGL.style("position", "fixed");
-  //   cWEBGL.style("z-index", "99999999");
-  // }
-
-  function setupCanvas() {
-    let c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
-    c.style("top", "0px");
-    c.style("left", "0px");
-    c.style("pointer-events", "none");
-    c.style("position", "fixed");
-    c.style("z-index", "99999999");
-  }
 };
 
-let my_sketch = new p5(sketch);
+// const setupCanvas = function(p5, sketch) {
+//   let c;
+
+//   if (sketch = sketch2D) {
+//     c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+//   } else {
+//     c = p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
+//   }
+
+//   c.style("top", "0px");
+//   c.style("left", "0px");
+//   c.style("pointer-events", "none");
+//   c.style("position", "fixed");
+//   c.style("z-index", "99999999");
+// };
+
+new p5(sketch3D);
+new p5(sketch2D);
