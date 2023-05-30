@@ -16,7 +16,11 @@ function setup() {
 }
 
 function draw() {
-  background(bgColor);
+  push();
+  fill('red');
+  rect(10,10, 200, 200);
+  pop();
+  // background(bgColor);
   points = [];
   let firstPoint;
   
