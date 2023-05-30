@@ -79,11 +79,10 @@ class Proportion {
   // Filtert nach Nodes mit Text, die keine Zahlen enthalten
   logNodeTextContent(node) {
     if (
-      node.nodeType === Node.TEXT_NODE && 
+      node.nodeType === Node.TEXT_NODE &&
       node.textContent.trim() != "" &&
       !/\d/.test(node.textContent.trim())
     ) {
-
       //Adds the tag's size to variables
       let textBox = node.parentElement;
       this.textBoxWidthSumCount += textBox.clientWidth;

@@ -1,62 +1,60 @@
-const colors = new Colors();
-let loremIpsum;
+let c;
+let loremIpsumManager;
+let loremIpsumText;
 let proportion;
+let colorManager;
+let colorList;
 let fontsManager;
 let fontsList;
+let amoeba;
 
 const sketch = function (p5) {
   p5.setup = function () {
-    p5.rectMode(p5.CENTER);
-
-    let c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
-    c.style("top", "0px");
-    c.style("left", "0px");
-    c.style("pointer-events", "none");
-    c.style("position", "fixed");
-    c.style("z-index", "99999999");
-
-    p5.textSize(20);
-    p5.fill(255, 0, 0);
+    setupCanvas(p5);
 
     loremIpsum = new LoremIpsum(p5);
     proportion = new Proportion(p5);
+    colorManager = new Colors();
+    colorList = colorManager.getColors();
     fontsManager = new FontsUsed(p5);
+    fontsList = fontsManager.getFonts();
+    amoeba = new Amoeba(p5, d3);
+  };
+
+  p5.draw = function () {
+    c.clear();
 
     //create dummy text in the length of the websites chars count
     loremIpsum.createTextField();
 
-    // for (let i = 0; i < colors.length; i++) {
-    //   console.log("colors " + i + ": " + colors[i]);
-    // }
-
-    fontsList = fontsManager.getFonts();
-    fontsManager.showFonts();
-
     //draw shapes in proportion of text to images of website
-    proportion.draw();
+    //  proportion.draw();
 
     p5.textFont(fontsList[0]);
-  };
+    fontsManager.showFonts();
 
-  p5.draw = function () {
-    // Fonts turn 90 degrees
-    // p5.push();
-    // p5.translate(p5.width - 150, p5.height / 2);
-    // p5.angleMode(p5.DEGREES);
-    // let angle = -90;
-    // p5.rotate(angle);
-    // p5.textSize(50);
-    // p5.noStroke();
-    // p5.fill("blue");
-    // p5.text("Schriftart 1", 0, 0);
-    // p5.text("Schriftart 2", 0, 50);
-    // p5.text("Schriftart 3", 0, 100);
-    // p5.pop();
-  };
+    //show colors
+    let x = 0;
 
-  p5.windowResized = function () {
-    p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+    for (let i = 0; i < colorList.length; i++) {
+      p5.fill(p5.color(colorList[i]));
+      p5.rect(x, 0, 30, 30);
+      x += 30;
+    }
+
+    //shows an amoeba
+    amoeba.draw();
   };
 };
 
-let my_sketch = new p5(sketch);
+const setupCanvas = function (p5) {
+  c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+
+  c.style("top", "0px");
+  c.style("left", "0px");
+  c.style("pointer-events", "none");
+  c.style("position", "fixed");
+  c.style("z-index", "99999999");
+};
+
+new p5(sketch);

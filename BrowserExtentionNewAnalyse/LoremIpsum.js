@@ -11,7 +11,7 @@ class LoremIpsum {
     return this.textArray;
   }
 
-  getAlleBuchstabenSum(){
+  getAlleBuchstabenSum() {
     return this.alleBuchstabenSum;
   }
 
@@ -71,7 +71,9 @@ class LoremIpsum {
 
     charsSum = h2LetterCountSum + h1LetterCountSum + aLetterCountSum +
       pLetterCountSum;
-      charsSum = Math.min(this.alleBuchstabenSum, 30000);
+    console.log("charsSum: " + charsSum);
+    charsSum = Math.min(charsSum, 30000);
+    console.log("charsSum: " + charsSum);
 
     // console.log("Anzahl Buchstaben H1 " + h1LetterCountSum);
     // console.log("Anzahl Buchstaben H2 " + h2LetterCountSum);
@@ -89,7 +91,9 @@ class LoremIpsum {
     for (let i = 0; i < this.textArray.length; i++) {
       this.p5.text(this.textArray[i], x, y);
 
-      if (x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50) {
+      if (
+        x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50
+      ) {
         x = 50;
         y += 25;
       } else {
