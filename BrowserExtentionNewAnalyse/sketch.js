@@ -1,5 +1,4 @@
 let c;
-
 let loremIpsumManager;
 let loremIpsumText;
 let proportion;
@@ -18,12 +17,19 @@ let angleGap;
 let colScale;
 let firstPoint;
 
-const sketch3D = function (p5) {
+const sketch = function (p5) {
   p5.setup = function () {
     setupCanvas(p5);
 
     cWEBGL = p5.createGraphics(p5.width, p5.height, p5.WEBGL);
     cWEBGL.setAttributes("alpha", true);
+
+    loremIpsum = new LoremIpsum(p5);
+    proportion = new Proportion(p5);
+    colorManager = new Colors();
+    colorList = colorManager.getColors();
+    fontsManager = new FontsUsed(p5);
+    fontsList = fontsManager.getFonts();
 
     //amoeba
     cWEBGL.angleMode(p5.DEGREES);
@@ -35,40 +41,31 @@ const sketch3D = function (p5) {
       "red",
       "blue",
       "yellow",
-      "ornage",
+      "orange",
     ]);
-  p5.draw = function () {
-  };
-};
-
-const sketch3D = function (p5) {
-  p5.setup = function () {
-    // setupCanvas(p5, this);
-
-    const c = p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
-
-    c.style("top", "0px");
-    c.style("left", "0px");
-    c.style("pointer-events", "none");
-    c.style("position", "fixed");
-    c.style("z-index", "99999999");
-
-    proportion = new Proportion(p5);
-    colorManager = new Colors();
-    colorList = colorManager.getColors();
-
-    //amoeba
-    p5.angleMode(p5.DEGREES);
-    p5.colorMode(p5.HSB, 360, 100, 100, 100);
-    p5.noStroke();
-
-    angleGap = 360 / numPoints;
-    bgColor = p5.color("#141636");
   };
 
   p5.draw = function () {
     c.clear();
     cWEBGL.clear();
+
+     //create dummy text in the length of the websites chars count
+     loremIpsum.createTextField();
+
+     //draw shapes in proportion of text to images of website
+     proportion.draw();
+ 
+     p5.textFont(fontsList[0]);
+     fontsManager.showFonts();
+  
+     //show colors
+     let x = 0;
+
+     for (let i = 0; i < colorList.length; i++) {
+       p5.fill(p5.color(colorList[i]));
+       p5.rect(x, 0, 30, 30);
+       x += 30;
+     }
 
     //amoeba
     // Main Shape
@@ -135,12 +132,13 @@ const sketch3D = function (p5) {
 
 const setupCanvas = function (p5) {
   c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+  
   c.style("top", "0px");
   c.style("left", "0px");
   c.style("pointer-events", "none");
   c.style("position", "fixed");
   c.style("z-index", "99999999");
+  
 };
 
-new p5(sketch3D);
-// new p5(sketch2D);
+new p5(sketch);
