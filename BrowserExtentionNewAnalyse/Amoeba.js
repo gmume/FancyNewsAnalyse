@@ -52,12 +52,19 @@ class Amoeba {
       let a = this.angleGap * i;
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
-      let r  = 300 + this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -300, 200);
+      let r = 300 +
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -300, 200);
 
       nx = 1600 + this.cWEBGL.sin(a) * 0.9; // nx and ny pos for noisy hue jitter
       ny = 1600 + this.cWEBGL.cos(a) * 0.9;
 
-      let h = this.cWEBGL.map(this.cWEBGL.noise(nx, ny, this.zhue), 0, 1, 150, 350);
+      let h = this.cWEBGL.map(
+        this.cWEBGL.noise(nx, ny, this.zhue),
+        0,
+        1,
+        150,
+        350,
+      );
       let x = this.cWEBGL.sin(a) * r; // actual x and y to draw
       let y = this.cWEBGL.cos(a) * r;
 
@@ -88,7 +95,7 @@ class Amoeba {
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
-        this.cWEBGL.vertex(p.x, p.y);
+      this.cWEBGL.vertex(p.x, p.y);
     }
 
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
