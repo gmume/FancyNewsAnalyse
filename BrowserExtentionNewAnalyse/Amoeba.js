@@ -1,7 +1,9 @@
 class Amoeba {
-  constructor(p5, d3) {
+  constructor(p5, d3, proportion) {
     this.p5 = p5;
     this.d3 = d3;
+    this.proportion = proportion;
+
     this.cWEBGL;
     this.zhue = 0;
     this.zpos = 0;
@@ -10,6 +12,14 @@ class Amoeba {
     this.angleGap;
     this.colScale;
     this.firstPoint;
+
+    this.colCenterX = 0;
+    this.colCenterY = 0;
+    this.colTheta = 0;
+    this.grayCenterX = 1000;
+    this.grayCenterY = 300;
+    this.grayTheta = 0;
+    this.scale;
 
     this.setup();
   }
@@ -37,6 +47,17 @@ class Amoeba {
 
   draw() {
     this.cWEBGL.clear();
+
+    if(this.proportion.getTextBoxArea()>this.proportion.getImgArea()){
+      this.scale = this.d3.scaleLinear().domain([0, this.proportion.getTextBoxArea()]).range([0, 300]);
+    }else{
+      this.scale = this.d3.scaleLinear().domain([0, this.proportion.getImgArea()]).range([0, 300]);
+    }
+
+    this.cWEBGL.push();
+    this.cWEBGL.translate(this.colCenterX, this.colCenterY);
+    // this.cWEBGL.rotate(colTheta);
+
     // Main Shape
     this.cWEBGL.beginShape();
 
@@ -52,12 +73,18 @@ class Amoeba {
       let a = this.angleGap * i;
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
-      let r  = 300 + this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -300, 200);
+      let r = this.scale(this.proportion.getImgArea()) + this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
 
       nx = 1600 + this.cWEBGL.sin(a) * 0.9; // nx and ny pos for noisy hue jitter
       ny = 1600 + this.cWEBGL.cos(a) * 0.9;
 
-      let h = this.cWEBGL.map(this.cWEBGL.noise(nx, ny, this.zhue), 0, 1, 150, 350);
+      let h = this.cWEBGL.map(
+        this.cWEBGL.noise(nx, ny, this.zhue),
+        0,
+        1,
+        150,
+        350,
+      );
       let x = this.cWEBGL.sin(a) * r; // actual x and y to draw
       let y = this.cWEBGL.cos(a) * r;
 
@@ -88,10 +115,13 @@ class Amoeba {
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
-        this.cWEBGL.vertex(p.x, p.y);
+      this.cWEBGL.vertex(p.x, p.y);
     }
 
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
+
+    this.cWEBGL.pop();
+    // this.colTheta = this.colTheta - 0.1;
 
     // To animate through noise
     this.zpos += 0.003;

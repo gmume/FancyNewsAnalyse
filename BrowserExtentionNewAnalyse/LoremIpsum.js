@@ -1,5 +1,4 @@
 class LoremIpsum {
-
   constructor(p5) {
     this.p5 = p5;
     this.textContent =
@@ -12,7 +11,7 @@ class LoremIpsum {
     return this.textArray;
   }
 
-  getAlleBuchstabenSum(){
+  getAlleBuchstabenSum() {
     return this.alleBuchstabenSum;
   }
 
@@ -72,13 +71,7 @@ class LoremIpsum {
 
     charsSum = h2LetterCountSum + h1LetterCountSum + aLetterCountSum +
       pLetterCountSum;
-      charsSum = Math.min(this.alleBuchstabenSum, 30000);
-
-    // console.log("Anzahl Buchstaben H1 " + h1LetterCountSum);
-    // console.log("Anzahl Buchstaben H2 " + h2LetterCountSum);
-    // console.log("Anzahl Buchstaben A " + aLetterCountSum);
-    // console.log("Anzahl Buchstaben P " + pLetterCountSum);
-    // console.log("Alle Buchstaben: " + alleBuchstabenSum);
+    charsSum = Math.min(this.alleBuchstabenSum, 30000);
 
     return charsSum;
   }
@@ -90,7 +83,9 @@ class LoremIpsum {
     for (let i = 0; i < this.textArray.length; i++) {
       this.p5.text(this.textArray[i], x, y);
 
-      if (x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50) {
+      if (
+        x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50
+      ) {
         x = 50;
         y += 25;
       } else {
