@@ -43,7 +43,7 @@ const sketch = function (p5) {
 
 const setupCanvas = function (p5) {
   c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
-
+  p5.frameRate(60)
   c.style("top", "0px");
   c.style("left", "0px");
   c.style("pointer-events", "none");
