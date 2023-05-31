@@ -1,8 +1,9 @@
 class Amoeba {
-  constructor(p5, d3, proportion) {
+  constructor(p5, d3, proportion, colors) {
     this.p5 = p5;
     this.d3 = d3;
     this.proportion = proportion;
+    this.colors = colors;
 
     this.cWEBGL;
     this.zhue = 0;
@@ -12,7 +13,6 @@ class Amoeba {
     this.angleGap;
     this.colScale;
     this.firstPoint;
-
     this.colCenterX = 0;
     this.colCenterY = 0;
     this.colTheta = 0;
@@ -30,28 +30,33 @@ class Amoeba {
       this.p5.height,
       this.p5.WEBGL,
     );
-    this.cWEBGL.setAttributes("alpha", true);
 
+    this.cWEBGL.setAttributes("alpha", true);
     this.cWEBGL.angleMode(this.p5.DEGREES);
     this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
     this.cWEBGL.noStroke();
 
     this.angleGap = 360 / this.numPoints;
     this.colScale = this.d3.scaleLinear().domain([-10, 0, 10]).range([
-      "red",
-      "blue",
-      "yellow",
-      "orange",
+      this.colors,
     ]);
+
+    console.log("colors: "+this.colors);
   }
 
   draw() {
     this.cWEBGL.clear();
 
-    if(this.proportion.getTextBoxArea()>this.proportion.getImgArea()){
-      this.scale = this.d3.scaleLinear().domain([0, this.proportion.getTextBoxArea()]).range([0, 300]);
-    }else{
-      this.scale = this.d3.scaleLinear().domain([0, this.proportion.getImgArea()]).range([0, 300]);
+    if (this.proportion.getTextBoxArea() > this.proportion.getImgArea()) {
+      this.scale = this.d3.scaleLinear().domain([
+        0,
+        this.proportion.getTextBoxArea(),
+      ]).range([0, 300]);
+    } else {
+      this.scale = this.d3.scaleLinear().domain([
+        0,
+        this.proportion.getImgArea(),
+      ]).range([0, 300]);
     }
 
     this.cWEBGL.push();
@@ -73,7 +78,8 @@ class Amoeba {
       let a = this.angleGap * i;
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
-      let r = this.scale(this.proportion.getImgArea()) + this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
+      let r = this.scale(this.proportion.getImgArea()) +
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
 
       nx = 1600 + this.cWEBGL.sin(a) * 0.9; // nx and ny pos for noisy hue jitter
       ny = 1600 + this.cWEBGL.cos(a) * 0.9;
@@ -82,8 +88,8 @@ class Amoeba {
         this.cWEBGL.noise(nx, ny, this.zhue),
         0,
         1,
-        150,
-        350,
+        -10,
+        10,
       );
       let x = this.cWEBGL.sin(a) * r; // actual x and y to draw
       let y = this.cWEBGL.cos(a) * r;
@@ -101,11 +107,11 @@ class Amoeba {
         y: this.cWEBGL.cos(a) * r * 0.2, // to draw smaller inner shape in bg color
       }; // to cover the bit where the gradient all joins together
 
-      this.cWEBGL.fill(h, 95, 100);
+      this.cWEBGL.fill(this.colScale(h));
       this.cWEBGL.vertex(x, y);
     }
 
-    this.cWEBGL.fill(this.firstPoint.h, 95, 100);
+    this.cWEBGL.fill(colScale(this.firstPoint.h));
     this.cWEBGL.vertex(this.firstPoint.x, this.firstPoint.y); // First / Last outer point
     this.cWEBGL.vertex(0, 0); // End shape in centre so gradient aims there
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
