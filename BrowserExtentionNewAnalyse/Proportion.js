@@ -30,32 +30,12 @@ class Proportion {
     this.textBoxArea = this.textBoxWidthSumCount * this.textBoxHeightSumCount;
   }
 
-  draw() {
-    this.p5.noStroke();
+  getTextBoxArea() {
+    return this.textBoxArea;
+  }
 
-    //draw text shape in red
-    this.p5.fill(255, 0, 0, 127);
-    this.p5.rect(
-      this.p5.windowWidth / 2 + 300,
-      this.p5.windowHeight / 2,
-      this.textBoxArea / 1000000,
-      this.textBoxArea / 1000000,
-    );
-
-    //draw image shape in yellow
-    this.p5.fill(255, 255, 0, 127);
-    this.p5.rect(
-      this.p5.windowWidth / 2 - 300,
-      this.p5.windowHeight / 2,
-      this.imgArea / 1000000,
-      this.imgArea / 1000000,
-    );
-
-    this.p5.textSize(20);
-    this.p5.fill(255, 255, 0);
-    this.p5.text("yellow = image", 60, 730);
-    this.p5.fill(255, 0, 0);
-    this.p5.text("red = text", 60, 700);
+  getImgArea() {
+    return this.imgArea;
   }
 
   //gets the size of the element and sums it up in variables

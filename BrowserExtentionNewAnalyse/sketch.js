@@ -1,7 +1,6 @@
 let c;
 let loremIpsumManager;
 let loremIpsumText;
-let proportion;
 let colorManager;
 let colorList;
 let fontsManager;
@@ -13,12 +12,11 @@ const sketch = function (p5) {
     setupCanvas(p5);
 
     loremIpsum = new LoremIpsum(p5);
-    proportion = new Proportion(p5);
     colorManager = new Colors();
     colorList = colorManager.getColors();
     fontsManager = new FontsUsed(p5);
     fontsList = fontsManager.getFonts();
-    amoeba = new Amoeba(p5, d3);
+    amoeba = new Amoeba(p5, d3, new Proportion(p5), new Colors().getColors());
   };
 
   p5.draw = function () {
@@ -27,11 +25,7 @@ const sketch = function (p5) {
     //create dummy text in the length of the websites chars count
     loremIpsum.createTextField();
 
-    //draw shapes in proportion of text to images of website
-    //  proportion.draw();
-
     p5.textFont(fontsList[0]);
-    fontsManager.showFonts();
 
     //show colors
     let x = 0;
@@ -49,7 +43,7 @@ const sketch = function (p5) {
 
 const setupCanvas = function (p5) {
   c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
-
+  p5.frameRate(60);
   c.style("top", "0px");
   c.style("left", "0px");
   c.style("pointer-events", "none");
