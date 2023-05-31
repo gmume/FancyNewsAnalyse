@@ -5,6 +5,7 @@ class LoremIpsum {
       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit ame";
     this.textArray = this.createText();
     this.alleBuchstabenSum = this.countChars();
+    this.charsSum;
   }
 
   getTextArray() {
@@ -69,33 +70,30 @@ class LoremIpsum {
       pLetterCountSum += pLetterCount;
     }
 
-    charsSum = h2LetterCountSum + h1LetterCountSum + aLetterCountSum +
+    this.charsSum = h2LetterCountSum + h1LetterCountSum + aLetterCountSum +
       pLetterCountSum;
-    console.log("charsSum: " + charsSum);
-    charsSum = Math.min(charsSum, 30000);
-    console.log("charsSum: " + charsSum);
-
-    // console.log("Anzahl Buchstaben H1 " + h1LetterCountSum);
-    // console.log("Anzahl Buchstaben H2 " + h2LetterCountSum);
-    // console.log("Anzahl Buchstaben A " + aLetterCountSum);
-    // console.log("Anzahl Buchstaben P " + pLetterCountSum);
-    // console.log("Alle Buchstaben: " + alleBuchstabenSum);
+    this.charsSum = Math.min(this.charsSum, 30000);
 
     return charsSum;
   }
 
+  getCharsSum() {
+    return this.charsSum;
+  }
+
   createTextField() {
-    let x = 50;
-    let y = 100;
+    let x = 400; // randabstand text links erste zeile
+    let y = 170;
 
     for (let i = 0; i < this.textArray.length; i++) {
       this.p5.text(this.textArray[i], x, y);
 
+      //textfeld grösse
       if (
-        x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 50
-      ) {
-        x = 50;
-        y += 25;
+        x + this.p5.textWidth(this.textArray[i]) >= this.p5.windowWidth - 400
+      ) { //300= randabstand rechts
+        x = 400; // randabstand links alle anderen zeilen
+        y += 17; // Zeilenabstand
       } else {
         x += this.p5.textWidth(this.textArray[i]);
       }

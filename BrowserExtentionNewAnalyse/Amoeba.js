@@ -107,8 +107,6 @@ class Amoeba {
 
       this.cWEBGL.fill(this.colScale(h));
       this.cWEBGL.vertex(x, y);
-
-      console.log(h);
     }
 
     this.cWEBGL.fill(this.colScale(this.firstPoint.h));
