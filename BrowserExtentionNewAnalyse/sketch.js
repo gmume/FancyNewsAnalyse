@@ -30,12 +30,13 @@ const sketch = function (p5) {
     fontsList = fontsManager.getFonts();
     amoeba = new Amoeba(p5, d3, new Proportion(p5), new Colors().getColors());
 
-    let buttonBackground = p5.createDiv("divButtonAll");
+    let buttonBackground = p5.createDiv("blubb");
     buttonBackground.position(0, p5.windowHeight - 50);
     buttonBackground.style("background-color", "black");
     buttonBackground.style("font-size", "50px");
     buttonBackground.style("position", "fixed");
     buttonBackground.style("width", "1500px");
+    buttonBackground.style("z-index", "3000");
 
     buttonAll = p5.createButton("on/off");
     buttonAll.position(1425, p5.windowHeight - 40);
