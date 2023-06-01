@@ -82,19 +82,38 @@ const sketch = function(p5) {
             p5.background('white');
         }
 
-        //show colors
-        let x = 0;
 
-        for (let i = 0; i < colorList.length; i++) {
-            p5.fill(p5.color(colorList[i]));
-            p5.rect(x, 0, 30, 30);
-            x += 30;
-        }
 
         if (
             buttonpressedAll || buttonpressedNumber || buttonpressedLetter ||
             buttonpressedAmoeba
         ) {
+
+            if (!buttonpressedAmoeba) {
+                //shows an amoeba
+                amoeba.draw();
+
+                //show colors
+                let x = 0;
+                let y = 0;
+                p5.random();
+                p5.randomSeed(2);
+
+                let currentColor;
+
+                for (let i = 0; i < colorList.length; i++) {
+                    currentColor = p5.color(colorList[i])
+                    console.log(currentColor)
+                    currentColor = p5.color(currentColor[0], currentColor[1], currentColor[2], currentColor[3] - 0.5);
+                    p5.fill(currentColor);
+
+                    p5.rect(x + 350, y + 100, 30, 30);
+                    x = p5.random(0, 700);
+                    y = p5.random(0, 520);
+
+
+                }
+            }
             if (!buttonpressedNumber) {
                 p5.push();
                 p5.fill(0);
@@ -119,10 +138,7 @@ const sketch = function(p5) {
                 p5.pop();
             }
 
-            if (!buttonpressedAmoeba) {
-                //shows an amoeba
-                amoeba.draw();
-            }
+
         }
 
         if (buttonSave == true) {
