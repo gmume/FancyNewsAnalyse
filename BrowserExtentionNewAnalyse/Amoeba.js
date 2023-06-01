@@ -90,7 +90,7 @@ class Amoeba {
     this.cWEBGL.beginShape();
 
     // This color will "shine" from centre
-    this.cWEBGL.fill(0, 0, 0);
+    this.cWEBGL.fill(255);
 
     // Draw one vertex in middle of canvas to start and end shape,
     // so that the gradient fill will "aim" towards there instead of
@@ -134,7 +134,8 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
+    this.cWEBGL.stroke(this.p5.color("black"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
@@ -199,7 +200,8 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
+    this.cWEBGL.stroke(this.p5.color("black"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {

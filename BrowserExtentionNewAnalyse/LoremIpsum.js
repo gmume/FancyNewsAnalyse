@@ -29,23 +29,38 @@ class LoremIpsum {
 
     countChars() {
         // let charsSum;
-
         let h2Tags = document.getElementsByTagName("h2");
         let h2LetterCountSum = 0;
+        //console.log('span' + h2Tagname);
 
         for (let i = 0; i < h2Tags.length; i++) {
             let h2Tag = h2Tags[i];
             let h2Text = h2Tag.textContent;
+            // if (i == 8 || i == 9 ){
+
+            //     console.log('h2 text' + h2Text);
+
+            //     this.p5.push();
+            //     this.p5.fill(255);
+            //     this.p5.strokeWeight(3);
+            //     this.p5.stroke(0);
+            //     this.p5.textSize(100);
+            //     this.p5.text(h2Text, 100, 100);
+            //     this.p5.pop();
+
+            // }
             let h2LetterCount = h2Text.length;
             h2LetterCountSum += h2LetterCount;
         }
 
         let h1Tags = document.getElementsByTagName("h1");
         let h1LetterCountSum = 0;
+        //console.log('h1' + h1Tags);
 
         for (let i = 0; i < h1Tags.length; i++) {
             let h1Tag = h1Tags[i];
             let h1Text = h1Tag.textContent;
+            //console.log('h1 text' + h1Text);
             let h1LetterCount = h1Text.length;
             h1LetterCountSum += h1LetterCount;
         }

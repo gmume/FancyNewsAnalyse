@@ -18,7 +18,7 @@ canvas {
   border: 2px solid white;
   transition-duration: 0.4s;
   font-family: Helvetica;
-  z-index: 3001;
+  z-index: 30001;
 }
 
 .buttonLetter:hover {
@@ -37,7 +37,7 @@ canvas {
   border: 2px solid white;
   transition-duration: 0.4s;
   font-family: Helvetica;
-  z-index: 3001;
+  z-index: 30001;
 }
 
 .buttonNumber:hover {
@@ -56,7 +56,7 @@ canvas {
   border: 2px solid white;
   transition-duration: 0.4s;
   font-family: Helvetica;
-  z-index: 3001;
+  z-index: 30001;
 }
 
 .buttonAll:hover {
@@ -75,7 +75,7 @@ canvas {
   border: 2px solid white;
   transition-duration: 0.4s;
   font-family: Helvetica;
-  z-index: 3001;
+  z-index: 30001;
 }
 
 .buttonAmoeba:hover {
@@ -94,7 +94,7 @@ canvas {
   border: 2px solid white;
   transition-duration: 0.4s;
   font-family: Helvetica;
-  z-index: 3001;
+  z-index: 30001;
 }
 
 .buttonSave:hover {

@@ -8,6 +8,7 @@ let fontsList;
 let beginingLetter;
 beginingLetter;
 let amoeba;
+let h2Tags = document.getElementsByTagName("h2");
 
 let buttonAll;
 let buttonpressedAll = true;
@@ -19,6 +20,7 @@ let buttonAmoeba;
 let buttonpressedAmoeba = false;
 let buttonSave;
 let buttonpressedSave = false;
+
 
 const sketch = function(p5) {
     p5.setup = function() {
@@ -38,7 +40,7 @@ const sketch = function(p5) {
         buttonBackground.style("font-size", "50px");
         buttonBackground.style("position", "fixed");
         buttonBackground.style("width", "1500px");
-        buttonBackground.style("z-index", "3000");
+        buttonBackground.style("z-index", "30000");
 
         buttonAll = p5.createButton("on/off");
         buttonAll.position(p5.windowWidth - 70, p5.windowHeight - 40);
@@ -82,34 +84,76 @@ const sketch = function(p5) {
             p5.background('white');
         }
 
-        //show colors
-        let x = 0;
-
-        for (let i = 0; i < colorList.length; i++) {
-            p5.fill(p5.color(colorList[i]));
-            p5.rect(x, 0, 30, 30);
-            x += 30;
-        }
-
         if (
             buttonpressedAll || buttonpressedNumber || buttonpressedLetter ||
             buttonpressedAmoeba
         ) {
+
+            if (!buttonpressedAmoeba) {
+                //shows an amoeba
+                amoeba.draw();
+
+             //show colors
+             let x = 0;
+             let y = 0;
+             p5.random();
+             p5.randomSeed(2);
+             let b = p5.random(30,100)
+             
+             for (let i = 0; i < colorList.length; i++) {
+                 p5.fill(p5.color(colorList[i]));
+                 p5.push();
+                 p5.rect(x + 350, y + 100, b, b);
+                 x = p5.random(0,700);
+                 y = p5.random(0,520);
+                 p5.pop();
+             }
+
+
+            }
+
             if (!buttonpressedNumber) {
                 p5.push();
                 p5.fill(0);
                 p5.textSize(15);
                 p5.textFont(fontsList[0]);
                 loremIpsum.createTextField();
-                p5.textSize(100);
-                p5.text(loremIpsum.getCharsSum(), 350, 200);
+                p5.fill(255);
+                p5.strokeWeight(3);
+                p5.stroke(0);
+                p5.textSize(300);
+                p5.text(loremIpsum.getCharsSum(), 350, 500);
                 p5.pop();
+
+                for (let i = 0; i < h2Tags.length; i++) {
+                    let h2Tag = h2Tags[i];
+                    let h2Text = h2Tag.textContent;
+
+                    if (i == 8 ){
+                            
+                            p5.push();
+                            p5.textWrap(p5.WORD);
+                            p5.textFont(fontsList[1]);
+                            p5.fill(255);
+                            p5.strokeWeight(3);
+                            p5.stroke(0);
+                            p5.textSize(50);
+                            p5.text(h2Text, 400, 400, 800);
+                            //y += 17; // Zeilenabstand
+                            p5.pop();
+
+                    }
+                 
+                }
+
             }
 
             if (!buttonpressedLetter) {
                 p5.push();
                 p5.textFont(fontsList[0]);
-                p5.fill(0);
+                p5.fill(255);
+                p5.strokeWeight(3);
+                p5.stroke(0);
                 p5.textSize(400);
                 p5.text(
                     document.title.charAt(0),
@@ -119,10 +163,6 @@ const sketch = function(p5) {
                 p5.pop();
             }
 
-            if (!buttonpressedAmoeba) {
-                //shows an amoeba
-                amoeba.draw();
-            }
         }
 
         if (buttonSave == true) {
