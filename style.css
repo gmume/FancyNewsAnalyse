@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap');
+
+:root {
+    --anzitems: 10;
+    /* Anzahl Links anpassen */
+}
+
+body {
+    background-color: rgb(50, 29, 96);
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Jost';
+	justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    padding: 1rem;
+    font-size: 3rem;
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    right: 1rem;
+    top: 0;
+    color: white;
+}
+
+.process {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+	justify-content: center;
+}
+
+.process li {
+    color: white;
+    height: 40vh;
+    flex-basis: calc(100vw / var(--anzitems));
+    flex-grow: 2;
+    flex-shrink: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid white;
+
+}
+
+.process li:hover {
+    background-color: white;
+    color: black;
+}
+
+.process li a {
+    color: white;
+    text-decoration: none;
+    font-size: 5rem;
+    text-align: center;
+
+}
+
+.process li:hover a {
+    color: black;
+}
+
+.process li a p {
+    font-size: 1.25rem;
+
+}
+
+/*-----------Sprint1 Praes-------------*/
+nav{
+    position: fixed;
+}
+section{
+    display: flex;
+}
+section article{
+    width:50%;
+}
