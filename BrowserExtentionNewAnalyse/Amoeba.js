@@ -21,12 +21,27 @@ class Amoeba {
     this.grayTheta = 0;
     this.scale;
     this.colorsCount = [];
+    this.greyCount = [];
+    this.greyColors = [
+      "DarkGrey",
+      "Grey",
+      "DimGrey",
+      "LightGrey",
+      "LightSlayGrey",
+      "Silver",
+      "SlateGrey"
+    ];
 
     for (let i = 0; i < this.colors.length; i++) {
       //console.log(i);
       this.colorsCount.push(i);
     }
 
+    for (let i = 0; i < this.greyColors.length; i++) {
+      //console.log(i);
+      this.greyCount.push(i);
+    }
+    console.log(this.greyCount);
     this.setup();
   }
 
@@ -46,6 +61,11 @@ class Amoeba {
       .scaleLinear()
       .domain(this.colorsCount)
       .range(this.colors);
+
+    this.greyScale = this.d3
+      .scaleLinear()
+      .domain(this.greyCount)
+      .range(this.greyColors);
   }
 
   draw() {
@@ -71,7 +91,7 @@ class Amoeba {
     this.cWEBGL.beginShape();
 
     // This color will "shine" from centre
-    //this.cWEBGL.fill(0, 0, 0);
+    this.cWEBGL.fill(0, 0, 0);
 
     // Draw one vertex in middle of canvas to start and end shape,
     // so that the gradient fill will "aim" towards there instead of
@@ -137,7 +157,7 @@ class Amoeba {
     this.cWEBGL.beginShape();
 
     // This color will "shine" from centre
-    //this.cWEBGL.fill(0, 0, 0);
+    this.cWEBGL.fill(0, 0, 0);
 
     // Draw one vertex in middle of canvas to start and end shape,
     // so that the gradient fill will "aim" towards there instead of
@@ -155,7 +175,7 @@ class Amoeba {
       nx = this.cWEBGL.sin(a); // nx and ny pos for noisy hue jitter
       ny = this.cWEBGL.cos(a);
 
-      let h = this.cWEBGL.map(nx, -1, 1, 0, 100);
+      let h = this.cWEBGL.map(nx, -1, 1, 0, this.greyCount.length - 1);
       let x = this.cWEBGL.sin(a) * r; // actual x and y to draw
       let y = this.cWEBGL.cos(a) * r;
 
@@ -172,11 +192,11 @@ class Amoeba {
         y: this.cWEBGL.cos(a) * r * 0.2, // to draw smaller inner shape in bg color
       }; // to cover the bit where the gradient all joins together
 
-      this.cWEBGL.fill(0, 0, 50);
+      this.cWEBGL.fill(this.greyScale(h));
       this.cWEBGL.vertex(x, y);
     }
 
-    this.cWEBGL.fill(0, 0, 50);
+    this.cWEBGL.fill(this.greyScale(this.firstPoint.h));
     this.cWEBGL.vertex(this.firstPoint.x, this.firstPoint.y); // First / Last outer point
     this.cWEBGL.vertex(0, 0); // End shape in centre so gradient aims there
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
