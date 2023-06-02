@@ -25,7 +25,7 @@ h1 {
     width: 100%;
     right: 1rem;
     top: 0;
-    color: white;
+    color: grey;
 }
 
 .process {
@@ -37,7 +37,7 @@ h1 {
 }
 
 .process li {
-    color: lightgrey;
+    color: grey;
     height: 40vh;
     flex-basis: calc(100vw / var(--anzitems));
     flex-grow: 2;
@@ -47,17 +47,17 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid white;
+    border-right: 1px solid grey;
 
 }
 
 .process li:hover {
-    background-color: white;
+    background-color: grey;
     color: black;
 }
 
 .process li a {
-    color: white;
+    color: grey;
     text-decoration: none;
     font-size: 5rem;
     text-align: center;
