@@ -2,16 +2,16 @@ let c;
 let fontsList;
 let amoeba;
 
-let buttonAll,    buttonpressedAll    = true;
+let buttonAll, buttonpressedAll = true;
 let buttonNumber, buttonpressedNumber = false;
 let buttonLetter, buttonpressedLetter = false;
 let buttonAmoeba, buttonpressedAmoeba = false;
-let buttonSave,   buttonpressedSave   = false;
+let buttonSave, buttonpressedSave = false;
 
 const sketch = function (p5) {
   p5.setup = function () {
     setupCanvas();
-    setupButtons()
+    setupButtons();
 
     loremIpsum = new LoremIpsum(p5);
     fontsList = new FontsUsed(p5).getFonts();
@@ -23,18 +23,22 @@ const sketch = function (p5) {
 
     if (buttonSave == true) {
       p5.background("white");
-    } else {
-      p5.push();
-      p5.noStroke();
-      p5.fill(255, 200);
-      p5.rect( 380, 150, p5.windowWidth - 760, p5.windowHeight - 300);
-      p5.pop();
     }
 
     if (
       buttonpressedAll || buttonpressedNumber || buttonpressedLetter ||
       buttonpressedAmoeba
     ) {
+      p5.push();
+      p5.noStroke();
+      p5.fill(255, 200);
+      p5.rect(380, 150, p5.windowWidth - 760, p5.windowHeight - 300);
+      p5.pop();
+
+      if (!buttonpressedAmoeba) {
+        amoeba.draw();
+      }
+
       if (!buttonpressedNumber) {
         p5.push();
         p5.fill(0);
@@ -57,10 +61,6 @@ const sketch = function (p5) {
           p5.windowHeight / 1.2,
         );
         p5.pop();
-      }
-
-      if (!buttonpressedAmoeba) {
-        amoeba.draw();
       }
     }
 
@@ -99,7 +99,7 @@ const sketch = function (p5) {
 
   function saveToFile() {
     buttonSave = true;
-  };
+  }
 
   function setupButtons() {
     let buttonBackground = p5.createDiv("&#8201");
@@ -140,7 +140,7 @@ const sketch = function (p5) {
     buttonSave.style("position", "fixed");
     buttonSave.class("buttonSave");
   }
-  
+
   function setupCanvas() {
     c = p5.createCanvas(p5.windowWidth, p5.windowHeight);
     p5.frameRate(60);
@@ -149,7 +149,7 @@ const sketch = function (p5) {
     c.style("pointer-events", "none");
     c.style("position", "fixed");
     c.style("z-index", "99999999");
-  };
+  }
 };
 
 new p5(sketch);

@@ -41,6 +41,5 @@ class Colors {
         }
       }
     }
-    console.log("colors: " + this.colors);
   }
 }

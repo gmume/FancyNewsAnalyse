@@ -3,7 +3,7 @@ class Amoeba {
     this.p5 = p5;
     this.d3 = d3;
     this.proportion = proportion;
-    this.colors = colors;
+    this.AllColors = colors;
 
     this.cWEBGL;
     this.zhue = 0;
@@ -22,23 +22,8 @@ class Amoeba {
     this.scale;
     this.colorsCount = [];
     this.greyCount = [];
-    this.greyColors = [
-      "DarkGrey",
-      "Grey",
-      "DimGrey",
-      "LightGrey",
-      "LightSlayGrey",
-      "Silver",
-      "SlateGrey",
-    ];
-
-    for (let i = 0; i < this.colors.length; i++) {
-      this.colorsCount.push(i);
-    }
-
-    for (let i = 0; i < this.greyColors.length; i++) {
-      this.greyCount.push(i);
-    }
+    this.colors = [];
+    this.greys = [];
 
     this.setup();
   }
@@ -52,19 +37,41 @@ class Amoeba {
 
     this.cWEBGL.setAttributes("alpha", true);
     this.cWEBGL.angleMode(this.p5.DEGREES);
-    this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
+    
     this.cWEBGL.noStroke();
+
+    let colCount = 0;
+    let grCount = 0;
+
+    this.AllColors.forEach(color => {
+      let currentColor = this.cWEBGL.color(color);
+
+      this.cWEBGL.push();
+      this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
+
+      if(this.cWEBGL.saturation(currentColor) > 20) {
+        this.colors.push(color);
+        this.colorsCount.push(colCount);
+        colCount += 1;
+      } else {
+        this.greys.push(color);
+        this.greyCount.push(grCount);
+        grCount += 1;
+      }
+
+      this.cWEBGL.pop();
+    });
 
     this.angleGap = 360 / this.numPoints;
     this.colScale = this.d3
       .scaleLinear()
       .domain(this.colorsCount)
       .range(this.colors);
-
+      
     this.greyScale = this.d3
       .scaleLinear()
       .domain(this.greyCount)
-      .range(this.greyColors);
+      .range(this.greys);
   }
 
   draw() {
