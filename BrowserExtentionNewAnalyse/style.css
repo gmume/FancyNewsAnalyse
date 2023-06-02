@@ -1,103 +1,104 @@
-html, body {
-  margin: 0;
-  padding: 0;
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
 
 canvas {
-  display: block;
+    display: block;
 }
 
 .buttonLetter {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 5px 5px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 2px solid white;
-  transition-duration: 0.4s;
-  font-family: Helvetica;
-  z-index: 3001;
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition-duration: 0.4s;
+    font-family: Helvetica;
+    z-index: 10003;
 }
 
 .buttonLetter:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .buttonNumber {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 5px 5px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 2px solid white;
-  transition-duration: 0.4s;
-  font-family: Helvetica;
-  z-index: 3001;
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition-duration: 0.4s;
+    font-family: Helvetica;
+    z-index: 10003;
 }
 
 .buttonNumber:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .buttonAll {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 5px 5px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 2px solid white;
-  transition-duration: 0.4s;
-  font-family: Helvetica;
-  z-index: 3001;
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition-duration: 0.4s;
+    font-family: Helvetica;
+    z-index: 10003;
 }
 
 .buttonAll:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .buttonAmoeba {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 5px 5px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 2px solid white;
-  transition-duration: 0.4s;
-  font-family: Helvetica;
-  z-index: 3001;
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition-duration: 0.4s;
+    font-family: Helvetica;
+    z-index: 10003;
 }
 
 .buttonAmoeba:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .buttonSave {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 5px 5px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 2px solid white;
-  transition-duration: 0.4s;
-  font-family: Helvetica;
-  z-index: 3001;
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition-duration: 0.4s;
+    font-family: Helvetica;
+    z-index: 10003;
 }
 
 .buttonSave:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
