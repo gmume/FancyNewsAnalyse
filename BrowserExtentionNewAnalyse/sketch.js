@@ -108,7 +108,7 @@ const sketch = function (p5) {
     buttonBackground.style("font-size", "50px");
     buttonBackground.style("position", "fixed");
     buttonBackground.style("width", "2000px");
-    buttonBackground.style("z-index", "3000");
+    buttonBackground.style("z-index", "10002");
 
     buttonAll = p5.createButton("on/off");
     buttonAll.position(p5.windowWidth - 70, p5.windowHeight - 40);
