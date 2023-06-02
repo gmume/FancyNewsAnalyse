@@ -37,7 +37,7 @@ h1 {
 }
 
 .process li {
-    color: white;
+    color: lightgrey;
     height: 40vh;
     flex-basis: calc(100vw / var(--anzitems));
     flex-grow: 2;
