@@ -1,6 +1,9 @@
 class Colors {
-  constructor() {
-    this.colors = this.setupColors();
+  constructor(p5) {
+    this.p5 = p5;
+    this.colors = [];
+
+    this.setupColors();
   }
 
   getColors() {
@@ -9,7 +12,6 @@ class Colors {
 
   setupColors() {
     let rgbRegex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/;
-    let allColors = [];
     let elems = document.getElementsByTagName("*");
     let total = elems.length;
     let x, y, elemStyles, styleName, styleValue, rgbVal;
@@ -21,24 +23,24 @@ class Colors {
         styleName = elemStyles[y];
         styleValue = elemStyles[styleName];
 
-        if (!styleValue) {
-          continue;
-        }
+        if (styleValue) {
+          // convert to string to avoid match exceptions
+          styleValue += "";
 
-        // convert to string to avoid match exceptions
-        styleValue += "";
+          rgbVal = styleValue.match(rgbRegex);
 
-        rgbVal = styleValue.match(rgbRegex);
-        if (!rgbVal) { // property does not contain a color
-          continue;
-        }
+          if (
+            rgbVal && rgbVal != "rgba(0, 0, 0, 0),0,0,0,0"
+          ) {
+            rgbVal = rgbVal.input;
 
-        if (allColors.indexOf(rgbVal.input) == -1) { // avoid duplicate entries
-          allColors.push(rgbVal.input);
+            if (!this.colors.includes(rgbVal)) {
+              this.colors.push(rgbVal);
+            }
+          }
         }
       }
     }
-
-    return allColors;
+    console.log("colors: " + this.colors);
   }
 }

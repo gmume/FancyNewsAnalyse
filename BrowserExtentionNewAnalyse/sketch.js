@@ -1,8 +1,5 @@
 let c;
-let loremIpsumManager, loremIpsumText;
-let colorManager, colorList;
-let fontsManager, fontsList;
-let beginingLetter;
+let fontsList;
 let amoeba;
 
 let buttonAll,    buttonpressedAll    = true;
@@ -16,13 +13,9 @@ const sketch = function (p5) {
     setupCanvas();
     setupButtons()
 
-    beginingLetter = new BeginingLetter(p5);
     loremIpsum = new LoremIpsum(p5);
-    colorManager = new Colors();
-    colorList = colorManager.getColors();
-    fontsManager = new FontsUsed(p5);
-    fontsList = fontsManager.getFonts();
-    amoeba = new Amoeba(p5, d3, new Proportion(p5), new Colors().getColors());
+    fontsList = new FontsUsed(p5).getFonts();
+    amoeba = new Amoeba(p5, d3, new Proportion(p5), new Colors(p5).getColors());
   };
 
   p5.draw = function () {
@@ -30,6 +23,12 @@ const sketch = function (p5) {
 
     if (buttonSave == true) {
       p5.background("white");
+    } else {
+      p5.push();
+      p5.noStroke();
+      p5.fill(255, 200);
+      p5.rect( 380, 150, p5.windowWidth - 760, p5.windowHeight - 300);
+      p5.pop();
     }
 
     if (
@@ -108,7 +107,7 @@ const sketch = function (p5) {
     buttonBackground.style("background-color", "black");
     buttonBackground.style("font-size", "50px");
     buttonBackground.style("position", "fixed");
-    buttonBackground.style("width", "1500px");
+    buttonBackground.style("width", "2000px");
     buttonBackground.style("z-index", "3000");
 
     buttonAll = p5.createButton("on/off");

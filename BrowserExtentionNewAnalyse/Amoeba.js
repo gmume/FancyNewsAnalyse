@@ -52,7 +52,7 @@ class Amoeba {
 
     this.cWEBGL.setAttributes("alpha", true);
     this.cWEBGL.angleMode(this.p5.DEGREES);
-    //this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
+    this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
     this.cWEBGL.noStroke();
 
     this.angleGap = 360 / this.numPoints;
@@ -84,7 +84,6 @@ class Amoeba {
 
     this.cWEBGL.push();
     this.cWEBGL.translate(this.colCenterX, this.colCenterY);
-    // this.cWEBGL.rotate(colTheta);
 
     // Main Shape
     this.cWEBGL.beginShape();

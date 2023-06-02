@@ -28,8 +28,6 @@ class LoremIpsum {
     }
 
     countChars() {
-        // let charsSum;
-
         let h2Tags = document.getElementsByTagName("h2");
         let h2LetterCountSum = 0;
 
