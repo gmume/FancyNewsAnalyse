@@ -1,128 +1,96 @@
 let sizeLine;
+let countSteps;
+let oldFrameCount;
 
-let directionX, directionY;
-let maxShiftX, maxShiftY;
+let shiftX, shiftY;
+let directionFactorX, directionFactorY;
 
-let vieMiddle;
+let lineStart, controlPoint1, lineMiddle, controlPoint2, lineEnd;
+
+let pivot;
 let minX, maxX, minY, maxY;
-
-let lineStart, lineControl1, lineMiddle, lineControl2, lineEnd; //lineStart = pivot point
-
-let path = [];
-let pathStart, pathControl1, pathControl2, pathEnd;
-let nextSectionEnd;
-let steps, step;
-let stepCoord;
-let stepX, stepY;
+let outlineMiddleRight, outlineMiddleLeft, outlineMiddleLower, outlineMiddleUpper;
 
 function setup() {
   createCanvas(400, 500);
   noFill();
   stroke(100, 60);
   strokeWeight(1);
-  background(230, 230, 230, 100);
+  background(230);
   frameRate(500);
   
+  countSteps = random(300, 500);
+  oldFrameCount = frameCount;
+
   setupCanvasAdjustment();
   setupLine();
-  setupPath();
-  createPath();
   setupBoundaries();
-  adjustBoundaries();
 }
 
 function draw() {
-
-  adjustBoundaries();
-  translate(width / 2 + stepX, height / 2 + stepY);
-  point(lineStart);
+  adjustOutlines();
+  dontCrossOutlines();
+  translate(width / 2 + shiftX, height / 2 + shiftY);
+  createLine();
   
-  if(steps > 0) {
-    steps--;
-  } else {
-    dontCrossBoundaries();
-    createPath();
+  if (frameCount > oldFrameCount + countSteps) {
+    changeDirection();
   }
 }
 
 function setupCanvasAdjustment() {
-  directionX = random([-1, 1]);
-  directionY = random([-1, 1]);
-  maxShiftX = sizeLine * directionX;
-  maxShiftY = sizeLine * directionY;
-}
-
-function setupBoundaries() {
-  minX = width  / 2 - width  / 2 * 0.9;
-  maxX = width  / 2 + width  / 2 * 0.9;
-  minY = height / 2 - height / 2 * 0.9;
-  maxY = height / 2 + height / 2 * 0.9;
-
-  adjustBoundaries();
+  shiftX = 1;
+  shiftY = 1;
+  directionFactorX = 1;
+  directionFactorY = 1;
 }
 
 function setupLine() {
   sizeLine = 150;
-  lineStart    = createVector(0, 0);
-  lineControl1 = createVector(random(0, sizeLine), random(0, sizeLine));
-  lineMiddle   = createVector(random(0, sizeLine), random(0, sizeLine));
-  lineControl2 = createVector(random(0, sizeLine), random(0, sizeLine));
-  lineEnd      = createVector(random(0, sizeLine), random(0, sizeLine));
+  lineStart     = createVector(0, 0);
+  controlPoint1 = createVector(random(0, sizeLine), random(0, sizeLine));
+  lineMiddle    = createVector(random(0, sizeLine), random(0, sizeLine));
+  controlPoint2 = createVector(random(0, sizeLine), random(0, sizeLine));
+  lineEnd       = createVector(random(0, sizeLine), random(0, sizeLine));
 }
 
-function setupPath() {
-  pathStart = createVector(0, 0);
-  pathEnd  = createVector(sizeLine, sizeLine);
-  nextSectionEnd = pathEnd;
-  steps = sizeLine;
-
-  createPath();
+function setupBoundaries() {
+  pivot = createVector(0, 0);
+  minX = (pivot.x - width  / 2) * 0.9;
+  maxX = (pivot.x + width  / 2) * 0.9;
+  minY = (pivot.y - height / 2) * 0.9;
+  maxY = (pivot.y + height / 2) * 0.9;
 }
 
-function createPath() {  
-  pathControl1 = createVector(random(pathStart.x, nextSectionEnd.x), random(pathStart.y, nextSectionEnd.y));
-  pathControl2 = createVector(random(pathStart.x, nextSectionEnd.x), random(pathStart.y, nextSectionEnd.y));
-  pathEnd      = createVector(random(pathStart.x, nextSectionEnd.x), random(pathStart.y, nextSectionEnd.y));
-  steps = sizeLine;
-  
-  for (let i = 0; i <= steps; i++) {
-    step = i / steps;
-    path[i] = createVector(bezierPoint(pathStart.x, pathControl1.x, pathControl2.x, pathEnd.x, step), bezierPoint(pathStart.y, pathControl1.y, pathControl2.y, pathEnd.y, step));
-  }
+function adjustOutlines() {
+  outlineMiddleRight = createVector(maxX - shiftX, minY - shiftY + height / 2 * 0.9);
+  outlineMiddleLeft  = createVector(minX - shiftX, minY - shiftY + height / 2 * 0.9);
+  outlineMiddleLower = createVector(minX - shiftX + width / 2 * 0.9, maxY - shiftY);
+  outlineMiddleUpper = createVector(minX - shiftX + width / 2 * 0.9, minY - shiftY);
 }
 
-function dontCrossBoundaries() {
-  directionX = random([-1, 1]);
-  directionY = random([-1, 1]);
-  pathStart = createVector(pathEnd.x, pathEnd.y);
-  nextSectionEnd = pathStart.x + sizeLine * directionX, pathStart.y + sizeLine * directionY;
-
-  if(nextSectionEnd.x > minX - sizeLine && maxX > nextSectionEnd.x) {
-    directionX * (-1);
+function dontCrossOutlines() {
+  if(pivot.x < outlineMiddleRight.x - sizeLine && outlineMiddleLeft.x < pivot.x) {
+    shiftX += 1 * directionFactorX;
+  } else {
+    shiftX -= 1 * directionFactorX;
+    changeDirection();
   }
   
-  if(nextSectionEnd.y > minY - sizeLine && maxY > nextSectionEnd.y) {
-    directionY * (-1);
+  if(pivot.y < outlineMiddleLower.y - sizeLine && outlineMiddleUpper.y < pivot.y) {
+    shiftY += 1 * directionFactorY;
+  } else {
+    shiftY -= 1 * directionFactorY;
+    changeDirection();
   }
 }
 
-function adjustBoundaries() {
-  stepCoord = path[sizeLine - steps];
-  stepX     = stepCoord.x;
-  stepY     = stepCoord.y;
-
-  push();
-  stroke('yellow');
-  strokeWeight(3);
-  line(minX, minY, maxX, minY);
-  line(maxX, minY, maxX, maxY);
-  line(maxX, maxY, minX, maxY);
-  line(minX, maxY, minX, minY);
-
-  stroke('red');
-  vieMiddle = createVector(width / 2, height / 2);
-  point(vieMiddle);
-  pop();
+function changeDirection() {
+  countSteps = random(300, 500);
+  directionFactorX = map(noise(random(0, 10)), 0, 1, -1, 1);
+  directionFactorY = map(noise(random(0, 10)), 0, 1, -1, 1);
+  oldFrameCount = frameCount;
+  background(360, 10);
 }
 
 function createLine() {
@@ -131,16 +99,16 @@ function createLine() {
   vertex(lineStart.x, lineStart.y);
   quadraticVertex(
     //control point 1
-    lineControl1.x,
-    lineControl1.y,
+    controlPoint1.x,
+    controlPoint1.y,
     //anchor point middle
     lineMiddle.x,
     lineMiddle.y,
   );
   quadraticVertex(
     //control point 2
-    lineControl2.x,
-    lineControl2.y,
+    controlPoint2.x,
+    controlPoint2.y,
     //anchor point end
     lineEnd.x,
     lineEnd.y,
