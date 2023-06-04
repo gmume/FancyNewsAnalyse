@@ -82,12 +82,6 @@ class LoremIpsum {
     return this.charsSum;
   }
 
-  getRect() {
-    // console.log("getRect: " + this.rectangle);
-    // this.p5.fill(255, 255, 255, 100);
-    return this.rectangle;
-  }
-
   createRect() {
     let x = 400; // Randabstand des Textes links in der ersten Zeile
     let y = 170;
