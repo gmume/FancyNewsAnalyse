@@ -3,7 +3,7 @@ class Amoeba {
     this.p5 = p5;
     this.d3 = d3;
     this.proportion = proportion;
-    this.colors = colors;
+    this.AllColors = colors;
 
     this.cWEBGL;
     this.zhue = 0;
@@ -14,31 +14,16 @@ class Amoeba {
     this.colScale;
     this.firstPoint;
     this.colCenterX = -300;
-    this.colCenterY = 0;
+    this.colCenterY = 100;
     this.colTheta = 0;
-    this.grayCenterX = 300;
-    this.grayCenterY = 0;
+    this.grayCenterX = 250;
+    this.grayCenterY = -200;
     this.grayTheta = 0;
     this.scale;
     this.colorsCount = [];
     this.greyCount = [];
-    this.greyColors = [
-      "DarkGrey",
-      "Grey",
-      "DimGrey",
-      "LightGrey",
-      "LightSlayGrey",
-      "Silver",
-      "SlateGrey",
-    ];
-
-    for (let i = 0; i < this.colors.length; i++) {
-      this.colorsCount.push(i);
-    }
-
-    for (let i = 0; i < this.greyColors.length; i++) {
-      this.greyCount.push(i);
-    }
+    this.colors = [];
+    this.greys = [];
 
     this.setup();
   }
@@ -52,19 +37,40 @@ class Amoeba {
 
     this.cWEBGL.setAttributes("alpha", true);
     this.cWEBGL.angleMode(this.p5.DEGREES);
-    //this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
     this.cWEBGL.noStroke();
+
+    let colCount = 0;
+    let grCount = 0;
+
+    this.AllColors.forEach(color => {
+      let currentColor = this.cWEBGL.color(color);
+
+      this.cWEBGL.push();
+      this.cWEBGL.colorMode(this.cWEBGL.HSB, 360, 100, 100, 100);
+
+      if(this.cWEBGL.saturation(currentColor) > 20) {
+        this.colors.push(color);
+        this.colorsCount.push(colCount);
+        colCount += 1;
+      } else {
+        this.greys.push(color);
+        this.greyCount.push(grCount);
+        grCount += 1;
+      }
+
+      this.cWEBGL.pop();
+    });
 
     this.angleGap = 360 / this.numPoints;
     this.colScale = this.d3
       .scaleLinear()
       .domain(this.colorsCount)
       .range(this.colors);
-
+      
     this.greyScale = this.d3
       .scaleLinear()
       .domain(this.greyCount)
-      .range(this.greyColors);
+      .range(this.greys);
   }
 
   draw() {
@@ -84,7 +90,6 @@ class Amoeba {
 
     this.cWEBGL.push();
     this.cWEBGL.translate(this.colCenterX, this.colCenterY);
-    // this.cWEBGL.rotate(colTheta);
 
     // Main Shape
     this.cWEBGL.beginShape();
@@ -102,7 +107,7 @@ class Amoeba {
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
       let r = this.scale(this.proportion.getImgArea()) +
-        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -50, 50);
 
       nx = this.cWEBGL.sin(a); // nx and ny pos for noisy hue jitter
       ny = this.cWEBGL.cos(a);
@@ -134,7 +139,7 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
@@ -149,7 +154,6 @@ class Amoeba {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     this.cWEBGL.push();
     this.cWEBGL.translate(this.grayCenterX, this.grayCenterY);
-    // this.cWEBGL.rotate(colTheta);
 
     // Main Shape
     this.cWEBGL.beginShape();
@@ -167,7 +171,7 @@ class Amoeba {
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
       let r = this.scale(this.proportion.getTextBoxArea()) +
-        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -50, 50);
 
       nx = this.cWEBGL.sin(a); // nx and ny pos for noisy hue jitter
       ny = this.cWEBGL.cos(a);
@@ -199,7 +203,7 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
