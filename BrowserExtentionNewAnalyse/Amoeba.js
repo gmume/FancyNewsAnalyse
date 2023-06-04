@@ -14,10 +14,10 @@ class Amoeba {
     this.colScale;
     this.firstPoint;
     this.colCenterX = -300;
-    this.colCenterY = 0;
+    this.colCenterY = 100;
     this.colTheta = 0;
-    this.grayCenterX = 300;
-    this.grayCenterY = 0;
+    this.grayCenterX = 250;
+    this.grayCenterY = -200;
     this.grayTheta = 0;
     this.scale;
     this.colorsCount = [];
@@ -37,7 +37,6 @@ class Amoeba {
 
     this.cWEBGL.setAttributes("alpha", true);
     this.cWEBGL.angleMode(this.p5.DEGREES);
-    
     this.cWEBGL.noStroke();
 
     let colCount = 0;
@@ -108,7 +107,7 @@ class Amoeba {
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
       let r = this.scale(this.proportion.getImgArea()) +
-        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -50, 50);
 
       nx = this.cWEBGL.sin(a); // nx and ny pos for noisy hue jitter
       ny = this.cWEBGL.cos(a);
@@ -140,7 +139,7 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
@@ -155,7 +154,6 @@ class Amoeba {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     this.cWEBGL.push();
     this.cWEBGL.translate(this.grayCenterX, this.grayCenterY);
-    // this.cWEBGL.rotate(colTheta);
 
     // Main Shape
     this.cWEBGL.beginShape();
@@ -173,7 +171,7 @@ class Amoeba {
       let nx = 600 + this.cWEBGL.sin(a) * 0.3; // nx and ny pos for noisy angle jitter
       let ny = 600 + this.cWEBGL.cos(a) * 0.3;
       let r = this.scale(this.proportion.getTextBoxArea()) +
-        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -100, 100);
+        this.cWEBGL.map(this.p5.noise(nx, ny, this.zpos), 0, 1, -50, 50);
 
       nx = this.cWEBGL.sin(a); // nx and ny pos for noisy hue jitter
       ny = this.cWEBGL.cos(a);
@@ -205,7 +203,7 @@ class Amoeba {
     this.cWEBGL.endShape(this.cWEBGL.CLOSE);
 
     // Inner Shape
-    this.cWEBGL.fill(this.p5.color("black"));
+    this.cWEBGL.fill(this.p5.color("white"));
     this.cWEBGL.beginShape();
 
     for (let p of this.points) {
