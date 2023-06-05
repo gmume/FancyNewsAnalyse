@@ -75,6 +75,7 @@ h1 {
 
 .screenShots {
 	height: 15vh;
+	border-right: none;
 }
 
 /*-----------Sprint1 Praes-------------*/
