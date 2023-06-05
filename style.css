@@ -81,6 +81,8 @@ h1 {
 #screenShots a {
 	font-size: 2rem;
 	flex-direction: row;
+	display: flex;
+	display-shrink: 2;
 }
 
 /*-----------Sprint1 Praes-------------*/
