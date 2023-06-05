@@ -73,7 +73,7 @@ h1 {
 
 }
 
-.screenShots {
+#screenShots {
 	height: 15vh;
 	flex-grow: 1;
 	border-right: none;
