@@ -78,7 +78,7 @@ h1 {
 }
 
 #screenShots {
-	pointer-events: ;
+	pointer-events: auto;
 	height: 15vh;
 	border-right: none;
 }
