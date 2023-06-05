@@ -73,6 +73,11 @@ h1 {
 
 }
 
+#processList li:hover {
+    background-color: white;
+    color: black;
+}
+
 #screenShots {
 	height: 15vh;
 	border-right: none;
@@ -83,6 +88,11 @@ h1 {
 	flex-direction: row;
 	display: flex;
 	display-shrink: 2;
+}
+
+#screenShots li:hover a {
+    background-color: black;
+    color: white;
 }
 
 /*-----------Sprint1 Praes-------------*/
