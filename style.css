@@ -74,12 +74,11 @@ h1 {
 }
 
 #processList {
-    /* background-color: white; */
-    /* color: black; */
 	pointer-events: none;
 }
 
 #screenShots {
+	pointer-events: ;
 	height: 15vh;
 	border-right: none;
 }
@@ -91,7 +90,7 @@ h1 {
 	display-shrink: 2;
 }
 
-#screenShots li:hover a {
+#screenShots:hover {
     background-color: white;
     color: black;
 }
