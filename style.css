@@ -75,8 +75,12 @@ h1 {
 
 #screenShots {
 	height: 15vh;
-	flex-grow: 1;
 	border-right: none;
+}
+
+#screenShots a {
+	font-size: 2rem;
+	flex-direction: row;
 }
 
 /*-----------Sprint1 Praes-------------*/
