@@ -73,6 +73,10 @@ h1 {
 
 }
 
+.screenShots {
+	height: 15vh;
+}
+
 /*-----------Sprint1 Praes-------------*/
 nav{
     position: fixed;
