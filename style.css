@@ -73,9 +73,10 @@ h1 {
 
 }
 
-#processList li:hover {
-    background-color: white;
-    color: black;
+#processList {
+    /* background-color: white; */
+    /* color: black; */
+	pointer-events: none;
 }
 
 #screenShots {
